@@ -1,0 +1,21 @@
+version: "3.1"
+services:
+
+    db:
+      image: mysqlpdo
+      volumes:
+        - ./src:/var/www/html
+      environment:
+        - MYSQL_ROOT_PASSWORD=test
+        - MYSQL_DATABASE=test
+        - MYSQL_USER=test
+        - MYSQL_PASSWORD=test
+
+    php:
+      image: php:7.1.8-apache
+      volumes:
+          - ./src:/var/www/html
+      ports:
+       - "5000:80"
+
+
