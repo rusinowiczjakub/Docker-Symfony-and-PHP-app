@@ -2,7 +2,7 @@ version: "3.1"
 services:
 
     db:
-      image: mysqlpdo
+      image: mysql
       volumes:
         - ./src:/var/www/html
       environment:
@@ -12,10 +12,11 @@ services:
         - MYSQL_PASSWORD=test
 
     php:
-      image: php:7.1.8-apache
+      build: ./docker/php/
       volumes:
           - ./src:/var/www/html
       ports:
        - "5000:80"
-
+      links:
+       - db
 

@@ -3,16 +3,18 @@
 echo "Witam, działam.";
 
 //phpinfo();
-$conn = new PDO(
-    'mysql:host=db;dbname=test',
-    'test',
-    'test'
-);
 
-$sql = 'CREATE TABLE dockertesting';
+$servername = "db";
+$username = "test";
+$password = "test";
+$db = 'test';
 
-if ($conn->query($sql) == TRUE){
-    echo "It's working nice";
-}else {
-    echo "Its not working";
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connected successfully";
+}
+catch(PDOException $e)
+{
+    echo "Connection failed: " . $e->getMessage();
 }
