@@ -1,20 +1,23 @@
 <?php
 
-echo "Witam, działam.";
-
-//phpinfo();
 
 $servername = "db";
 $username = "test";
 $password = "test";
 $db = 'test';
 
+//    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
+
+$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
+
+
+    $sql = 'CREATE TABLE test';
+    $conn->query($sql);
+    echo "New table created successfully";
 }
 catch(PDOException $e)
 {
-    echo "Connection failed: " . $e->getMessage();
+    echo $sql . "<br>" . $e->getMessage();
 }
+
