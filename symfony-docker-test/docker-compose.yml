@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  php:
+    build: ./docker/php/
+    volumes:
+      - ./docker/php/php.ini:/jakub/local/etc/php/php.ini:ro
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+    links:
+      - db2
+
+#
+#  webserver:
+#    image: nginx:1.11
+#    depends_on:
+#      - php
+#    volumes:
+#      - ./docker/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+#    ports:
+#      - 5080:80
+
+  composer:
+    image: composer:1.4
+    working_dir: /var/www/app
+
+  db2:
+    image: mysql
+    container_name: database2
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
