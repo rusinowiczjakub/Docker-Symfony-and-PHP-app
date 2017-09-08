@@ -63,4 +63,5 @@ If you want to stop containers use CTRL + C or if you ran containers in backgrou
 ````
 $ docker-compose down
 ````
-ony-docker-app README for further instructions.
+
+Let's have a fun!
