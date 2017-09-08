@@ -37,6 +37,11 @@ Now you can run:
 https://localhost:5000/
 
 ````
+or for PhpMyAdmin:
+
+````
+https://localhost:5050/
+````
 
 <h4>Step 5</h4>
 
