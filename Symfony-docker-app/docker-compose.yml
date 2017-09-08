@@ -2,7 +2,7 @@ version: '3'
 services:
 
   php:
-    container_name: PHP-fpm
+    container_name: PHP
     build: ./docker/php/
     volumes:
       - ./docker/php/php.ini://local/etc/php/php.ini:ro
@@ -12,7 +12,7 @@ services:
       - db
 
   webserver:
-    container_name: NGiNX
+    container_name: nginx
     image: nginx:1.11
     depends_on:
       - php
@@ -23,7 +23,7 @@ services:
 
   db:
     image: mysql
-    container_name: MySQL_database
+    container_name: mySQL
     volumes:
       - ./data:/var/lib/mysql
     environment:
@@ -33,6 +33,6 @@ services:
       - MYSQL_PASSWORD=test
 
   composer:
-    container_name: composer
+    container_name: Composer1.4
     image: composer:1.4
-    working_dir: /var/www/app
+    working_dir: /var/www/YOUR_PROJECT_NAME

@@ -1,24 +1,49 @@
-# PHP APP DOCKERIZED
+# Symfony APP DOCKERIZED
+
 
 ## How to use
 
 <h4>Step 1</h4>
-Open docker-compose.yml and configure MySQL database in these services:
- 
- ````
-     db:
-       image: mysql
-       container_name: database_php
-       volumes:
-         - ./data:/var/lib/mysql
-       environment:
-         - MYSQL_ROOT_PASSWORD=test
-         - MYSQL_DATABASE=test
-         - MYSQL_USER=test
-         - MYSQL_PASSWORD=test
- ````
 
+Create your Symfony App with Symfony installer in Symfony-docker-app directory:
+
+````
+$ symfony new YOUR_PROJECT_NAME
+```` 
 <h4>Step 2</h4>
+Open docker-compose.yml and configure MySQL database and your project directory name in these services:
+
+````
+  php:
+    container_name: PHP
+    build: ./docker/php/
+    volumes:
+      - ./docker/php/php.ini://local/etc/php/php.ini:ro
+      - ./YOUR_PROJECT_NAME:/var/www/YOUR_PROJECT_NAME
+    working_dir: /var/www/YOUR_PROJECT_NAME
+    links:
+      - db
+      
+   ...
+   
+  db:
+    image: mysql
+    container_name: mySQL
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      
+  composer:
+    container_name: Composer1.4
+    image: composer:1.4
+    working_dir: /var/www/YOUR_PROJECT_NAME
+````
+
+<h4>Step 3</h4>
 
 Now you are ready to run your docker containers:
 
@@ -30,11 +55,11 @@ or run docker-compose in background
 ````
 $ docker-compose up -d
 ````
-<h4>Step 3</h4>
+<h4>Step 4</h4>
 Now you just have to set your database config in parameters.yml and you can run:
 
 ````
-https://localhost:5000/
+https://localhost:5080/app.php
 
 ````
 
@@ -63,4 +88,3 @@ If you want to stop containers use CTRL + C or if you ran containers in backgrou
 ````
 $ docker-compose down
 ````
-ony-docker-app README for further instructions.

@@ -3,7 +3,7 @@ services:
 
     db:
       image: mysql
-      container_name: database
+      container_name: database_php
       volumes:
         - ./data:/var/lib/mysql
       environment:
@@ -14,7 +14,7 @@ services:
 
     php:
       build: ./docker/php/
-      container_name: php
+      container_name: php-apache
       volumes:
         - ./src:/var/www/html
       ports:
@@ -24,7 +24,7 @@ services:
 
     phpmyadmin:
       image: phpmyadmin/phpmyadmin
-      container_name: phpmyadmin
+      container_name: PhpMyAdmin
       environment:
         - PMA_ARBITRARY=1
         - PMA_HOST=localhost
