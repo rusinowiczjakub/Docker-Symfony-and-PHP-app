@@ -11,6 +11,6 @@ RUN apt-get update && apt-get install -y \
         opcache
 
 # Permission fix
-RUN usermod -u 1000 www-data  
+RUN usermod -u 1000 www-data
 
 RUN docker-php-ext-install pdo pdo_mysql
